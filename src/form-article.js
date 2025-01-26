@@ -1,7 +1,7 @@
 /*Créer une fonction qui vérifie que les donnéees du formulaire sont bien renseignés
  *De plus, si un champ est vide alors il devra être encadré en rouge
  */
-function checkForm() {
+function checkForm(form) {
     const titleToAdd = form.querySelector('input[name=titleToAdd]'); //ici on récupère 1 seul élément ayant le tag input et l'attribut name avec la valeur titleToAdd
     const descriptionToAdd = form.querySelector('textarea[name=descriptionToAdd]'); //ici on récupère 1 seul élément ayant le tag textarea et l'attribut name avec la valeur descriptionToAdd
     let isValid = true;
@@ -32,7 +32,8 @@ function checkForm() {
  */
 function submitForm(event) {
     event.preventDefault(); //permet de bloquer le rechargement de la page à la validation du formulaire
-    if (!checkForm()) {
+        
+    if (!checkForm(event.currentTarget)) { //currentTarget ou target permet de récupérer l'élément qui a déclenché l'événement
         return false;
     }
 
@@ -42,6 +43,16 @@ function submitForm(event) {
     const title = titleToAdd.value; //l'attribut value eest un raccourci pour .attr(value)
     const description = descriptionToAdd.value; //l'attribut value eest un raccourci pour .attr(value)
 
+    createArticle(title, description);
+
+    displayArticleCount();
+
+    resetForm();
+
+    return false; //permet de bloquer le rechargement de la page à la validation du formulaire
+}
+
+function createArticle(title, description) {
     const article = document.createElement('article');
     const span = document.createElement('span');
     const p = document.createElement('p');
@@ -53,11 +64,9 @@ function submitForm(event) {
     article.classList.add('article'); //article.setAttribute('class', 'article');
     document.querySelector('#newsList').appendChild(article);
 
-    displayArticleCount();
-
-    resetForm();
-
-    return false; //permet de bloquer le rechargement de la page à la validation du formulaire
+    // l'équivalent ci-dessous
+    // const article = `<article class="article"><span>${title}</span><p>${description}</p></article>`;
+    // document.querySelector('#newsList').appendChild(article);
 }
 
 function resetForm(){

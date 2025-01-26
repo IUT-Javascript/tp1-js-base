@@ -1,3 +1,7 @@
+/*
+ * Le fichier main va contenir le code principal de notre application
+ * Ce fichier ne va contenir que des appels de fonctions
+*/
 displayArticleCount();
 
 /*A la validation du formulaire, on récupère la valeur des 2 champs 
@@ -8,3 +12,4 @@ displayArticleCount();
 */
 const form = document.querySelector('form');
 form.addEventListener('submit', submitForm);
+//form.onsubmit = submitForm;
