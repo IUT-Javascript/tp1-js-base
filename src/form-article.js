@@ -1,5 +1,5 @@
-/*Créer une fonction qui vérifie que les donnéees du formulaire sont bien renseignés
- *De plus, si un champ est vide alors il devra être encadré en rouge
+/* Créer une fonction qui vérifie que les donnéees du formulaire sont bien renseignés
+ * De plus, si un champ est vide alors il devra être encadré en rouge
  */
 function checkForm(form) {
     const titleToAdd = form.querySelector('input[name=titleToAdd]'); //ici on récupère 1 seul élément ayant le tag input et l'attribut name avec la valeur titleToAdd
@@ -9,26 +9,28 @@ function checkForm(form) {
     titleToAdd.setAttribute('style', 'border-color: inherit');
     descriptionToAdd.setAttribute('style', 'border-color: inherit');
 
-    if (titleToAdd.value === '') {
-        logMessage('Le champ titleToAdd n\'a pas été renseigné', 'error'); //console.error permet de mettre en avant (en rouge) un message dans la console
-        titleToAdd.setAttribute('style', `border-color: ${ERROR_COLOR}`); //la méthode setAttribute permet de définir la valeur d'un attribut HTML de l'élément
+    // on vérifie si les champs sont vides
+    // la méthode trim() permet de supprimer les espaces en début et fin de chaîne
+    if (titleToAdd.value.trim() === '') {
+        logMessage('Le champ titleToAdd n\'a pas été renseigné', 'error'); // console.error permet de mettre en avant (en rouge) un message dans la console
+        titleToAdd.setAttribute('style', `border-color: ${ERROR_COLOR}`); // la méthode setAttribute permet de définir la valeur d'un attribut HTML de l'élément
         isValid = false;
     }
 
-    if (descriptionToAdd.value === '') {
-        logMessage('Le champ descriptionToAdd n\'a pas été renseigné', 'error'); //console.error permet de mettre en avant (en rouge) un message dans la console
-        descriptionToAdd.setAttribute('style', `border-color: ${ERROR_COLOR}`); //la méthode setAttribute permet de définir la valeur d'un attribut HTML de l'élément
+    if (descriptionToAdd.value.trim() === '') {
+        logMessage('Le champ descriptionToAdd n\'a pas été renseigné', 'error'); // console.error permet de mettre en avant (en rouge) un message dans la console
+        descriptionToAdd.setAttribute('style', `border-color: ${ERROR_COLOR}`); // la méthode setAttribute permet de définir la valeur d'un attribut HTML de l'élément
         isValid = false;
     }
 
     return isValid;
 }
 
-/*A la validation du formulaire, on récupère la valeur des 2 champs 
- *et on va créer un article 
- *(<article class="article"><span>$TITLE</span><p>$DESCRIPTION</p></article>)
- *et on l'insert dans la div ayant l'id newsList
- *Pour sélectionner un input on peut faire 'input[name=titleToAdd]'
+/* A la validation du formulaire, on récupère la valeur des 2 champs 
+ * et on va créer un article 
+ * (<article class="article"><span>$TITLE</span><p>$DESCRIPTION</p></article>)
+ * et on l'insert dans la div ayant l'id newsList
+ * Pour sélectionner un input on peut faire 'input[name=titleToAdd]'
  */
 function submitForm(event) {
     event.preventDefault(); //permet de bloquer le rechargement de la page à la validation du formulaire
